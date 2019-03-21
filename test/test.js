@@ -7,6 +7,14 @@ describe('实现一个基类，可以继承，可以监听事件', function () {
       constructor(options) {
         super(options)
       }
+      on(val, cb) {
+        let temp = val;
+        if (temp === 'test') {
+          cb && cb('hello world')
+        } else {
+          cb && cb()
+        }
+      }
     }
 
     it('能够监听事件', function (done) {
@@ -46,10 +54,10 @@ describe('实现一个基类，可以继承，可以监听事件', function () {
           return 'hello world'
         }
       }, {
-        say: function (word) {
-          return word
-        }
-      })
+          say: function (word) {
+            return word
+          }
+        })
       var myclass = new MyClass
       assert.equal(myclass.getVal(), 'hello world')
       assert.equal(MyClass.say('haha'), 'haha')
